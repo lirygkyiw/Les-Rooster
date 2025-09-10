@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda / Lesrooster</title>
+  <style>
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  overflow: hidden;
+  background: url('rain.gif') no-repeat center center fixed; /* jouw GIF */
+  background-size: cover;
+}
+
+
+    .container {
+      display: flex;
+      height: 100%;
+    }
+
+
+    .sidebar {
+      width: 220px;
+      background: rgba(44, 62, 80, 0.85);
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .sidebar button {
+      margin: 6px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #3498db;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .sidebar button:hover {
+      background: #2980b9;
+    }
+
+
+    .content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      padding: 30px;
+      overflow-y: auto;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      padding: 20px 30px;
+      width: 100%;
+      max-width: 600px;
+      min-height: 400px;
+    }
+
+    .card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+
+    .les-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .les-item:last-child {
+      border-bottom: none;
+    }
+
+    .tijd {
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .vak {
+      margin-top: 4px;
+      color: #fff;
+    }
+
+  
+    .les-item.pauze {
+      background-color: #28a7469f; 
+      border-left: 4px solid #1e7e34;
+      padding-left: 6px;
+    }
+
+
+    .les-item.les {
+      background-color: #3498db6f; 
+      border-left: 4px solid #2980b9;
+      padding-left: 6px;
+    }
+
+
+    .placeholder {
+      text-align: center;
+      color: #888;
+      margin-top: 100px;
+      font-size: 18px;
+    }
+
+hr.dikke-lijn {
+  border: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.768);
+  margin: 20px 0;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+<div class="sidebar">
+  <h2>Dagen</h2>
+  <button onclick="toonRooster('Maandag')">Maandag</button>
+  <button onclick="toonRooster('Dinsdag')">Dinsdag</button>
+  <button onclick="toonRooster('Woensdag')">Woensdag</button>
+  <button onclick="toonRooster('Donderdag')">Donderdag</button>
+  <button onclick="toonRooster('Vrijdag')">Vrijdag</button>
+
+  <hr class="dikke-lijn">
+
+    <button onclick="window.location.href='index.html'">Home</button>
+
+  <hr class="dikke-lijn">
+
+  <button onclick="window.location.href='https://intranet.nuborgh.nl/'">Intranet</button>
+  <button onclick="window.location.href='https://workspace.nuborgh.nl/nuborgh'">Workspace</button>
+  <button onclick="window.location.href='https://nuborgh.magister.net/magister/'">Magister</button>
+  <button onclick="window.location.href='https://nuborgh.mynetpay.nl/Login'">Printer/Pas Info</button>
+
+
+</div>
+
+
+
+
+    <div class="content">
+      <div class="card">
+        <h2 id="dag-titel">Kies een dag</h2>
+        <div id="rooster-container">
+          <p class="placeholder">Klik links op een dag om je rooster te bekijken 📅</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const roosters = {
+      Maandag: [
+        ["8:00 - 9:15", "RE (LWR 7)"],
+        ["9:15 - 10:30", "Z&W (LWR 15)"],
+        ["10:30 - 10:45", "Pauze"],
+        ["10:45 - 12:00", "Z&W (LWR 15)"],
+        ["12:00 - 12:20", "Pauze"],
+        ["12:20 - 13:35", "NE (LWR 7)"],
+        ["13:35 - 14:50", "WI (LWR 7)"],
+        ["14:50 - 15:00", "Pauze"],
+        ["15:00 - 16:15", "VRIJ"],
+      ],
+      Dinsdag: [
+        ["8:00 - 9:15", "Z&W (LWR 15)"],
+        ["9:15 - 10:30", "Z&W (LWR 15)"],
+        ["10:30 - 10:45", "Pauze"],
+        ["10:45 - 12:00", "GD (LWR 7)"],
+        ["12:00 - 12:20", "Pauze"],
+        ["12:20 - 13:35", "BI (LWR 6)"],
+        ["13:35 - 14:50", "VRIJ"],
+        ["14:50 - 15:00", "Pauze"],
+        ["15:00 - 16:15", "VRIJ"],
+      ],
+      Woensdag: [
+        ["8:00 - 9:15", "VRIJ"],
+        ["9:15 - 10:30", "VRIJ"],
+        ["10:30 - 10:45", "Pauze"],
+        ["10:45 - 12:00", "NE (LWR 7)"],
+        ["12:00 - 12:20", "Pauze"],
+        ["12:20 - 13:35", "Z&W (LWR 15)"],
+        ["13:35 - 14:50", "Z&W (LWR 15)"],
+        ["14:50 - 15:00", "Pauze"],
+        ["15:00 - 16:15", "Z&W (LWR 15)"],
+      ],
+      Donderdag: [
+        ["8:00 - 9:15", "B&S (Sportzaal)"],
+        ["9:15 - 10:30", "MA (LWR 7)"],
+        ["10:30 - 10:45", "Pauze"],
+        ["10:45 - 12:00", "Z&W (LWR 27)"],
+        ["12:00 - 12:20", "Pauze"],
+        ["12:20 - 13:35", "Z&W (LWR 27)"],
+        ["13:35 - 14:50", "BI (LWR 6)"],
+        ["14:50 - 15:00", "Pauze"],
+        ["15:00 - 16:15", "EN (LWR 7)"],
+      ],
+      Vrijdag: [
+        ["8:00 - 9:15", "STAGE"],
+        ["9:15 - 10:30", "STAGE"],
+        ["10:30 - 10:45", "Pauze"],
+        ["10:45 - 12:00", "STAGE"],
+        ["12:00 - 12:20", "Pauze"],
+        ["12:20 - 13:35", "STAGE"],
+        ["13:35 - 14:50", "STAGE"],
+        ["14:50 - 15:00", "Pauze"],
+        ["15:00 - 16:15", "STAGE"],
+      ],
+    };
+
+    function toonRooster(dag) {
+      document.getElementById("dag-titel").innerText = "Rooster voor " + dag;
+      let html = "";
+      roosters[dag].forEach(uur => {
+        const isPauze = uur[1].toLowerCase().includes("pauze");
+        html += `
+          <div class="les-item ${isPauze ? 'pauze' : 'les'}">
+            <div class="tijd">${uur[0]}</div>
+            <div class="vak">${uur[1]}</div>
+          </div>
+        `;
+      });
+      document.getElementById("rooster-container").innerHTML = html;
+    }
+  </script>
+</body>
+</html>

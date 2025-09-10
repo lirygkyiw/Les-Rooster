@@ -1,104 +1,71 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesrooster</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beginscherm</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: url('rain.gif') no-repeat center center fixed; /* jouw GIF */
+      background-size: cover; /* zorgt dat de GIF altijd het scherm vult */
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.43); 
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 300px;
+      text-align: center;
+      margin: auto;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #1b1b1b;
+    }
+
+    a {
+      display: block;
+      text-decoration: none;
+      background: #4c98af;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+      transition: 0.3s;
+    }
+    a:hover {
+      background: #4583a0;
+      transform: translateY(-3px);
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.25);
+    }
+  </style>
 </head>
 <body>
-    <h1>Lesrooster OL4 E&O + M&T</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Dagen & tijden</th>
-                <th>8:00 - 9:15 (Les 1)</th>
-                <th>9:15 - 10:30 (Les 2)</th>
-                <th>10:30 - 10:45 (Pauze 1)</th>
-                <th>10:45 - 12:00 (Les 3)</th>
-                <th>12:00 - 12:20 (Pauze 2)</th>
-                <th>12:20 - 13:35 (Les 4)</th>
-                <th>13:35 - 14:50 (Les 5)</th>
-                <th>14:50 - 15:00 (Pauze 3)</th>
-                <th>15:00 - 16:15 (Les 6)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Maandag</th>
-                <td>VRIJ</td>
-                <td>EC (LWR 8)</td>
-                <td>Pauze</td>
-                <td>NE & GD (LWR 7)</td>
-                <td>Pauze</td>
-                <td>E&O (LWR 14)</td>
-                <td>E&O (LWR 14)</td>
-                <td>Pauze</td>
-                <td>E&O (LWR 14)</td>
-            </tr>
-            <tr>
-                <th>Dinsdag</th>
-                <td>AVO (LWR 7)</td>
-                <td>NE & WI (LWR 7)</td>
-                <td>Pauze</td>
-                <td>E&O (LWR 14)</td>
-                <td>Pauze</td>
-                <td>E&O (LWR 14)</td>
-                <td>EN & AVO (LWR 7)</td>
-                <td>Pauze</td>
-                <td>VRIJ</td>
-            </tr>
-            <tr>
-                <th>Woensdag</th>
-                <td>VRIJ</td>
-                <td>E&O (LWR 14)</td>
-                <td>Pauze</td>
-                <td>E&O (LWR 14)</td>
-                <td>Pauze</td>
-                <td>EC (LWR 9)</td>
-                <td>VRIJ</td>
-                <td>Pauze</td>
-                <td>VRIJ</td>
-            </tr>
-            <tr>
-                <th>Donderdag</th>
-                <td>E&O (LWR 14)</td>
-                <td>E&O (LWR 14)</td>
-                <td>Pauze</td>
-                <td>EN (LWR 7)</td>
-                <td>Pauze</td>
-                <td>CKV (LWR 27)</td>
-                <td>VRIJ</td>
-                <td>Pauze</td>
-                <td>VRIJ</td>
-            </tr>
-            <tr>
-                <th>Vrijdag</th>
-                <td>GD (LWR 7)</td>
-                <td>AVO (WI) (LWR 7)</td>
-                <td>Pauze</td>
-                <td>RE (LWR 7)</td>
-                <td>Pauze</td>
-                <td>B&S (Sportzaal)</td>
-                <td>VRIJ</td>
-                <td>Pauze</td>
-                <td>VRIJ</td>
-            </tr>
-        </tbody>
-    </table>
+
+  <div class="container">
+    <h1>Welkom</h1>
+    <a href="EO.html">E&O</a>
+    <a href="ZW.html">Z&W</a>
+    <a href="MT.html">M&T</a>
+    <a href="PIE.html">PIE</a>
+    <a href="BWI.html">BWI</a>
+    <a href="GRN.html">GRN</a>
+  </div>
+
 </body>
 </html>
-
